@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  api_fail:
+    build:
+      context: .
+      dockerfile: Fail.Dockerfile
+    container_name: api-mqtt-fail
+    environment:
+      APP_PORT: 8001
+    network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  api_work:
+    build:
+      context: .
+      dockerfile: Work.Dockerfile
+    container_name: api-mqtt-work
+    environment:
+      APP_PORT: 8002
+    network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"

@@ -20,6 +20,7 @@ async def shutdown():
 
 @mqtt.on_connect()
 def connect(client, flags, rc, properties):
+    print("Connected!")
     mqtt.client.subscribe("testtopic/#")
 
 
