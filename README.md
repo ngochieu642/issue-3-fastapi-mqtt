@@ -2,9 +2,12 @@
 
 ## Environment
 
-Linux
+- Linux: Ubuntu 20
+- Docker: python:3.7-stretch
 
-## Run run.py directly
+## Test on local
+
+### 1. Run run.py directly
 
 - Raise Error as below
 
@@ -29,11 +32,27 @@ ERROR:    Traceback (most recent call last):
 RuntimeError: Task <Task pending coro=<LifespanOn.main() running at /home/coder/.pyenv/versions/3.7.8/envs/webdev/lib/python3.7/site-packages/uvicorn/lifespan/on.py:55>> got Future <Future pending> attached to a different loop
 ```
 
-## Start uvicorn inside app
+### 2. Start uvicorn inside app
 
 ```
 cd app
 uvicorn main:app --reload
 ```
 
-- Work as expected
+- Work as expected:
+  - Connected to Broker
+  - Receive messages
+
+## Test inside docker
+
+1. Run run.py
+```bash
+make local-fail
+docker logs -f api-mqtt-fail
+```
+
+2. Run uvicorn directly with app
+```bash
+make local-work
+docker logs -f api-mqtt-work
+```
